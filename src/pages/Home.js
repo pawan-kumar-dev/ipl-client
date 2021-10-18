@@ -30,12 +30,18 @@ const Home = () => {
     }
   }, [input]);
   const onKeyDown = () => {
-    setSearchInput(input);
-    axios.get(`/players/search?from=${input}`).then((res) => {
-      if (res && res.data) {
-        setPlayers(res.data);
-      }
-    });
+    const teamValue = Object.keys(teams).find((team) =>
+      team.toLowerCase().includes(input.toLowerCase())
+    );
+    if (teamValue) {
+      setSearchInput(teamValue);
+      setInput(teamValue);
+      axios.get(`/players/search?from=${teamValue}`).then((res) => {
+        if (res && res.data) {
+          setPlayers(res.data);
+        }
+      });
+    }
   };
   return loading ? (
     <LoaderComponent />

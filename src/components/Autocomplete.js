@@ -54,10 +54,10 @@ const Autocomplete = ({
   };
   const onKeyDown = (e) => {
     if (e.key === "Enter" && filteredSuggestions.length > 0) {
-      setFilteredSuggestions([]);
       setInput(filteredSuggestions[0]);
       setActiveSuggestionIndex(0);
       setShowSuggestions(false);
+      setFilteredSuggestions([]);
       onPressEnter();
     }
   };
